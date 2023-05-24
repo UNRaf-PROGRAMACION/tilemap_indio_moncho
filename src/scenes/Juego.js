@@ -1,6 +1,7 @@
 // URL to explain PHASER scene: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/scene/
 
 export default class Juego extends Phaser.Scene {
+  score;
   constructor() {
     // key of the scene
     // the key will be used to start the scene by other scenes
@@ -8,11 +9,13 @@ export default class Juego extends Phaser.Scene {
   }
 
   init() {
-    // this is called before the scene is created
-    // init variables
-    // take data passed from other scenes
-    // data object param {}
+    this.gameOver = false;
+    this.score = 0;
   }
+  // this is called before the scene is created
+  // init variables
+  // take data passed from other scenes
+  // data object param {}
 
   create() {
     // todo / para hacer: texto de puntaje
@@ -35,7 +38,7 @@ export default class Juego extends Phaser.Scene {
 
     plataformaLayer.setCollisionByProperty({ colision: true });
 
-    console.log(objectosLayer);
+   // console.log(objectosLayer);
 
     // crear el jugador
     // Find in the Object Layer, the name "dude" and get position
@@ -56,7 +59,7 @@ export default class Juego extends Phaser.Scene {
 
     // Create empty group of starts
     this.estrellas = this.physics.add.group();
-
+    console.log('hola');
     // find object layer
     // if type is "stars", add to stars group
     objectosLayer.objects.forEach((objData) => {
@@ -64,7 +67,7 @@ export default class Juego extends Phaser.Scene {
 
       const { x = 0, y = 0, name } = objData;
       switch (name) {
-        case "estrella": {
+        case "star": {
           // add star to scene
           // console.log("estrella agregada: ", x, y);
           const star = this.estrellas.create(x, y, "star");
@@ -72,14 +75,34 @@ export default class Juego extends Phaser.Scene {
         }
       }
     });
-
+    console.log('hola');
     this.physics.add.collider(this.jugador, plataformaLayer);
     this.physics.add.collider(this.estrellas, plataformaLayer);
     this.physics.add.collider(
       this.jugador,
       this.estrellas,
-      this.recolectarEstrella
+      this.recolectarEstrella,
+      null,
+      this
     );
+
+
+    //score
+
+    this.score = 0;
+    this.scoreText = this.add.text(20, 20, "Score:" + this.score, {
+      fontSize: "32px",
+      fontStyle: "bold",
+      fill: "#ffffff",
+    });
+    
+    //timer
+    this.timer = 60;
+    this.timerText = this.add.text(750, 20, this.timer, {
+      fontSize: "32px",
+      fontStyle: "bold",
+      fill: "#000",
+    });
   }
 
   update() {
@@ -114,5 +137,13 @@ export default class Juego extends Phaser.Scene {
 
     // todo / para hacer: controlar si el grupo esta vacio
     // todo / para hacer: ganar el juego
+  }
+
+  onSecond() {
+    this.timer--;
+    // this.timerText.setText(this.timer);
+    if (this.timer <= 0) {
+      this.gameOver = true;
+    }
   }
 }

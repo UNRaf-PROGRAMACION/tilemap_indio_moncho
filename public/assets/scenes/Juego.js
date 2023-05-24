@@ -1,6 +1,7 @@
 // URL to explain PHASER scene: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/scene/
 
 export default class Juego extends Phaser.Scene {
+  score;
   constructor() {
     // key of the scene
     // the key will be used to start the scene by other scenes
@@ -8,6 +9,8 @@ export default class Juego extends Phaser.Scene {
   }
 
   init() {
+    this.score = 0;
+    this.gameOver = false;
     // this is called before the scene is created
     // init variables
     // take data passed from other scenes
@@ -20,6 +23,7 @@ export default class Juego extends Phaser.Scene {
     this.load.image("tilesFondo", "./public/assets/images/sky.png");
     this.load.image("tilesPlataforma", "./public/assets/images/platform.png");
 
+    this.load.image("exit", "./public/assets/images/exit.png");
     this.load.image("star", "./public/assets/images/star.png");
 
     this.load.spritesheet("dude", "./public/assets/images/dude.png", {
@@ -29,8 +33,6 @@ export default class Juego extends Phaser.Scene {
   }
 
   create() {
-    // todo / para hacer: texto de puntaje
-
     //  Our player animations, turning, walking left and walking right.
     this.anims.create({
       key: "left",
@@ -74,11 +76,7 @@ export default class Juego extends Phaser.Scene {
     console.log(objectosLayer);
 
     // crear el jugador
-    // Find in the Object Layer, the name "dude" and get position
-    const spawnPoint = map.findObject(
-      "objetos",
-      (obj) => obj.name === "jugador"
-    );
+    let spawnPoint = map.findObject("objetos", (obj) => obj.name === "jugador");
     console.log(spawnPoint);
     // The player and its settings
     this.jugador = this.physics.add.sprite(spawnPoint.x, spawnPoint.y, "dude");
@@ -114,8 +112,46 @@ export default class Juego extends Phaser.Scene {
     this.physics.add.collider(
       this.jugador,
       this.estrellas,
-      this.recolectarEstrella
+      this.recolectarEstrella,
+      null,
+      this
     );
+    // todo / para hacer: texto de puntaje
+    this.score = 0;
+    this.scoreText = this.add.text(20, 20, "Score:" + this.score, {
+      fontSize: "32px",
+      fontStyle: "bold",
+      fill: "#ffffff",
+    });
+
+    //timer
+    this.timer = 60;
+    this.timerText = this.add.text(700, 20, this.timer, {
+      fontSize: "32px",
+      fontStyle: "bold",
+      fill: "#000",
+    });
+
+    this.time.addEvent({
+      delay: 1000,
+      callback: this.onSecond,
+      callbackScope: this,
+      loop: true,
+    });
+
+    objectosLayer.objects.forEach((objData) => {
+      const { x = 0, y = 0, name } = objData;
+      switch (name) {
+        case "salida": {
+          const salida = this.exits.create(x, y, "exit").setScale(0.05);
+          break;
+        }
+      }
+    });
+
+    this.physics.add.collider(this.exit, plataformaLayer);
+    this.exit.visible = false;
+    this.physics.add.overlap(this.jugador, this.exits, null, this);
   }
 
   update() {
@@ -146,9 +182,23 @@ export default class Juego extends Phaser.Scene {
   recolectarEstrella(jugador, estrella) {
     estrella.disableBody(true, true);
 
+    if (this.estrellas.getTotalUsed() === 0) {
+    }
+    console.log();
+
+    //this.scoreText.setText(`Score: ${this.score.toString()}`);
+
     // todo / para hacer: sumar puntaje
 
     // todo / para hacer: controlar si el grupo esta vacio
     // todo / para hacer: ganar el juego
+  }
+
+  onSecond() {
+    this.timer--;
+    this.timerText.setText(this.timer);
+    if (this.timer <= 0) {
+      this.gameOver = true;
+    }
   }
 }

@@ -9,7 +9,7 @@
  "name":"imagen",
  "spacing":0,
  "tilecount":4,
- "tiledversion":"1.7.2",
+ "tiledversion":"1.8.5",
  "tileheight":1290,
  "tiles":[
         {
@@ -38,5 +38,5 @@
         }],
  "tilewidth":1988,
  "type":"tileset",
- "version":"1.6"
+ "version":"1.8"
 }
