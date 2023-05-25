@@ -139,15 +139,12 @@ export default class Juego extends Phaser.Scene {
       loop: true,
     });
 
-    objectosLayer.objects.forEach((objData) => {
-      const { x = 0, y = 0, name } = objData;
-      switch (name) {
-        case "salida": {
-          const salida = this.exits.create(x, y, "exit").setScale(0.05);
-          break;
-        }
-      }
-    });
+    spawnPoint = map.findObject("objetos", (obj) => obj.name === "exit");
+    console.log("spawn point exit ", spawnPoint);
+    this.salida = this.physics.add
+      .sprite(spawnPoint.x, spawnPoint.y, "exit")
+      .setScale(0.05);
+    this.salida.visible = false;
 
     this.physics.add.collider(this.exit, plataformaLayer);
     this.exit.visible = false;
