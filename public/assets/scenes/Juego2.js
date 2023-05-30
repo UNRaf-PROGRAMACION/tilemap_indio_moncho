@@ -1,12 +1,8 @@
 // URL to explain PHASER scene: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/scene/
+import Juego from "./Juego.js";
 
-export default class Juego extends Phaser.Scene {
+export default class Juego2 extends Phaser.Scene {
   score;
-  constructor() {
-    // key of the scene
-    // the key will be used to start the scene by other scenes
-    super("hello-world");
-  }
 
   init() {
     this.score = 0;
@@ -19,7 +15,7 @@ export default class Juego extends Phaser.Scene {
 
   preload() {
     // load assets
-    this.load.tilemapTiledJSON("map", "./public/tilemaps/nivel1.json");
+    this.load.tilemapTiledJSON("map", "./public/tilemaps/nivel2.json");
     this.load.image("tilesFondo", "./public/assets/images/sky.png");
     this.load.image("tilesPlataforma", "./public/assets/images/platform.png");
 
@@ -98,11 +94,11 @@ export default class Juego extends Phaser.Scene {
       .setScale(0.05);
     this.salida.visible = false;
 
-    /* spawnPoint = map.findObject("objetos", (obj) => obj.name === "bomb");
+    spawnPoint = map.findObject("objetos", (obj) => obj.name === "bomb");
     console.log("spawn point bomb ", spawnPoint);
     this.bomb = this.physics.add
-      .sprite(spawnPoint.x, spawnPoint.y, "bomb") 
-      .setScale(2); */
+      .sprite(spawnPoint.x, spawnPoint.y, "bomb")
+      .setScale(2);
 
     // find object layer
     // if type is "stars", add to stars group
@@ -123,7 +119,7 @@ export default class Juego extends Phaser.Scene {
     this.physics.add.collider(this.jugador, plataformaLayer);
     this.physics.add.collider(this.estrellas, plataformaLayer);
     this.physics.add.collider(this.salida, plataformaLayer);
-    // this.physics.add.collider(this.bomb, plataformaLayer);
+    this.physics.add.collider(this.bomb, plataformaLayer);
     this.physics.add.collider(
       this.jugador,
       this.estrellas,
@@ -153,9 +149,6 @@ export default class Juego extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
-
-    
-
   }
 
   update() {
@@ -189,8 +182,13 @@ export default class Juego extends Phaser.Scene {
     if (this.estrellas.getTotalUsed() == 0) {
       this.salida.visible = true;
     }
-  
   }
+
+//   explotarBomba(jugador, bomb) {
+//     bomb.disableBody(true, true);
+//     this.gameOver = true;
+//     console.log(this.gameOver);
+//   }
 
   onSecond() {
     this.timer--;
