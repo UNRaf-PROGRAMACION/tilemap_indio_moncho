@@ -109,6 +109,7 @@ export default class Juego extends Phaser.Scene {
 
     this.physics.add.collider(this.jugador, plataformaLayer);
     this.physics.add.collider(this.estrellas, plataformaLayer);
+    this.physics.add.collider(this.salida, plataformaLayer);
     this.physics.add.collider(
       this.jugador,
       this.estrellas,
@@ -139,16 +140,15 @@ export default class Juego extends Phaser.Scene {
       loop: true,
     });
 
-    spawnPoint = map.findObject("objetos", (obj) => obj.name === "exit");
+    spawnPoint = map.findObject("objetos", (obj) => obj.name === "salida");
     console.log("spawn point exit ", spawnPoint);
     this.salida = this.physics.add
       .sprite(spawnPoint.x, spawnPoint.y, "exit")
       .setScale(0.05);
     this.salida.visible = false;
 
-    this.physics.add.collider(this.exit, plataformaLayer);
-    this.exit.visible = false;
-    this.physics.add.overlap(this.jugador, this.exits, null, this);
+    
+    this.physics.add.overlap(this.jugador, this.salida, null, this);
   }
 
   update() {
@@ -179,16 +179,10 @@ export default class Juego extends Phaser.Scene {
   recolectarEstrella(jugador, estrella) {
     estrella.disableBody(true, true);
 
-    if (this.estrellas.getTotalUsed() === 0) {
+    if (this.estrellas.getTotalUsed() == 0) {
+      this.salida.visible = true;
     }
     console.log();
-
-    //this.scoreText.setText(`Score: ${this.score.toString()}`);
-
-    // todo / para hacer: sumar puntaje
-
-    // todo / para hacer: controlar si el grupo esta vacio
-    // todo / para hacer: ganar el juego
   }
 
   onSecond() {
