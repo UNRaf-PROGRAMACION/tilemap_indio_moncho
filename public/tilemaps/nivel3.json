@@ -189,7 +189,7 @@
         {
          "columns":25,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/Valen Planisich\/Indio Moncho\/Juego_indio_moncho\/public\/images\/sky.png",
+         "image":"..\/images\/sky.png",
          "imageheight":602,
          "imagewidth":802,
          "margin":0,
@@ -203,7 +203,7 @@
         {
          "columns":12,
          "firstgid":451,
-         "image":"..\/..\/..\/..\/Valen Planisich\/Indio Moncho\/Juego_indio_moncho\/public\/images\/platform.png",
+         "image":"..\/images\/platform.png",
          "imageheight":32,
          "imagewidth":400,
          "margin":0,

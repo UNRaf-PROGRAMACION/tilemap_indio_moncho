@@ -1,4 +1,5 @@
 // URL to explain PHASER scene: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/scene/
+import Juego2 from "./Juego2.js";
 
 export default class Juego extends Phaser.Scene {
   score;
@@ -20,12 +21,16 @@ export default class Juego extends Phaser.Scene {
   preload() {
     // load assets
     this.load.tilemapTiledJSON("map", "./public/tilemaps/nivel1.json");
+    //this.load.tilemapTiledJSON("map", "./public/tilemaps/nivel2.json");
+
     this.load.image("tilesFondo", "./public/assets/images/sky.png");
     this.load.image("tilesPlataforma", "./public/assets/images/platform.png");
 
     this.load.image("exit", "./public/assets/images/exit.png");
     this.load.image("star", "./public/assets/images/star.png");
     this.load.image("bomb", "./public/assets/images/bomb.png");
+
+    this.load.image("gameOver", "./public/assets/images/GameOver.png");
 
     this.load.spritesheet("dude", "./public/assets/images/dude.png", {
       frameWidth: 32,
@@ -102,7 +107,8 @@ export default class Juego extends Phaser.Scene {
     console.log("spawn point bomb ", spawnPoint);
     this.bomb = this.physics.add
       .sprite(spawnPoint.x, spawnPoint.y, "bomb") 
-      .setScale(2); */
+      .setScale(2); 
+          this.bomb.setBounce(1); */
 
     // find object layer
     // if type is "stars", add to stars group
@@ -131,6 +137,23 @@ export default class Juego extends Phaser.Scene {
       null,
       this
     );
+    this.physics.add.collider(
+      this.jugador,
+      this.salida,
+      this.pasarNivel,
+      null,
+      this
+    );
+    /*
+    this.physics.add.collider(
+      this.bomb,
+      this.estrellas,
+      this.boom,
+      null,
+      this
+    );
+    */
+
     // todo / para hacer: texto de puntaje
     this.score = 0;
     this.scoreText = this.add.text(20, 20, "Score:" + this.score, {
@@ -140,7 +163,7 @@ export default class Juego extends Phaser.Scene {
     });
 
     //timer
-    this.timer = 60;
+    this.timer = 30;
     this.timerText = this.add.text(700, 20, this.timer, {
       fontSize: "32px",
       fontStyle: "bold",
@@ -153,9 +176,6 @@ export default class Juego extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
-
-    
-
   }
 
   update() {
@@ -181,16 +201,33 @@ export default class Juego extends Phaser.Scene {
     if (this.cursors.up.isDown && this.jugador.body.blocked.down) {
       this.jugador.setVelocityY(-330);
     }
+
+    if (this.gameOver) {
+      this.scene.start("GameOver");
+    }
   }
 
   recolectarEstrella(jugador, estrella) {
     estrella.disableBody(true, true);
+    //this.score = this.score + 10;
+    //console.log(this.score);
 
-    if (this.estrellas.getTotalUsed() == 0) {
+    if (this.estrellas.getTotalUsed() === 0) {
       this.salida.visible = true;
     }
-  
   }
+
+  pasarNivel(jugador, salida) {
+    if (salida.visible === true) {
+      this.scene.start("Juego2");
+    }
+  }
+
+  /*
+ boom() {
+  gameOver = true
+ } 
+  */
 
   onSecond() {
     this.timer--;

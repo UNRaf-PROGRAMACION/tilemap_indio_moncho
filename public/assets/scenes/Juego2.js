@@ -1,11 +1,15 @@
 // URL to explain PHASER scene: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/scene/
-import Juego from "./Juego.js";
 
 export default class Juego2 extends Phaser.Scene {
   score;
+  constructor() {
+    // key of the scene
+    // the key will be used to start the scene by other scenes
+    super("Juego2");
+  }
 
   init() {
-    this.score = 0;
+    this.score = this.score;
     this.gameOver = false;
     // this is called before the scene is created
     // init variables
@@ -15,43 +19,11 @@ export default class Juego2 extends Phaser.Scene {
 
   preload() {
     // load assets
-    this.load.tilemapTiledJSON("map", "./public/tilemaps/nivel2.json");
-    this.load.image("tilesFondo", "./public/assets/images/sky.png");
-    this.load.image("tilesPlataforma", "./public/assets/images/platform.png");
-
-    this.load.image("exit", "./public/assets/images/exit.png");
-    this.load.image("star", "./public/assets/images/star.png");
-    this.load.image("bomb", "./public/assets/images/bomb.png");
-
-    this.load.spritesheet("dude", "./public/assets/images/dude.png", {
-      frameWidth: 32,
-      frameHeight: 48,
-    });
+    this.load.tilemapTiledJSON("map3", "./public/tilemaps/nivel3.json");
   }
 
   create() {
-    //  Our player animations, turning, walking left and walking right.
-    this.anims.create({
-      key: "left",
-      frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    this.anims.create({
-      key: "turn",
-      frames: [{ key: "dude", frame: 4 }],
-      frameRate: 20,
-    });
-
-    this.anims.create({
-      key: "right",
-      frames: this.anims.generateFrameNumbers("dude", { start: 5, end: 8 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-
-    const map = this.make.tilemap({ key: "map" });
+    const map = this.make.tilemap({ key: "map3" });
 
     // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
     // Phaser's cache (i.e. the name you used in preload)
@@ -94,12 +66,6 @@ export default class Juego2 extends Phaser.Scene {
       .setScale(0.05);
     this.salida.visible = false;
 
-    spawnPoint = map.findObject("objetos", (obj) => obj.name === "bomb");
-    console.log("spawn point bomb ", spawnPoint);
-    this.bomb = this.physics.add
-      .sprite(spawnPoint.x, spawnPoint.y, "bomb")
-      .setScale(2);
-
     // find object layer
     // if type is "stars", add to stars group
     objectosLayer.objects.forEach((objData) => {
@@ -111,6 +77,12 @@ export default class Juego2 extends Phaser.Scene {
           // add star to scene
           // console.log("estrella agregada: ", x, y);
           const star = this.estrellas.create(x, y, "star");
+          break;
+        }
+        case "bomb": {
+          this.bomb = this.physics.add
+            .sprite(spawnPoint.x, spawnPoint.y, "bomb")
+            .setScale(2);
           break;
         }
       }
@@ -127,6 +99,21 @@ export default class Juego2 extends Phaser.Scene {
       null,
       this
     );
+    this.physics.add.collider(
+      this.jugador,
+      this.salida,
+      this.pasarNivel,
+      null,
+      this
+    );
+    this.physics.add.collider(
+      this.jugador,
+      this.bomb,
+      this.boom,
+      null,
+      this
+    );
+  
     // todo / para hacer: texto de puntaje
     this.score = 0;
     this.scoreText = this.add.text(20, 20, "Score:" + this.score, {
@@ -149,6 +136,15 @@ export default class Juego2 extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
+
+this.cameras.main.startFollow(this,this.jugador);
+
+this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+
+
   }
 
   update() {
@@ -179,16 +175,15 @@ export default class Juego2 extends Phaser.Scene {
   recolectarEstrella(jugador, estrella) {
     estrella.disableBody(true, true);
 
-    if (this.estrellas.getTotalUsed() == 0) {
+    if (this.estrellas.getTotalUsed() < 5) {
       this.salida.visible = true;
     }
   }
 
-//   explotarBomba(jugador, bomb) {
-//     bomb.disableBody(true, true);
-//     this.gameOver = true;
-//     console.log(this.gameOver);
-//   }
+
+ boom() {
+  gameOver = true
+ } 
 
   onSecond() {
     this.timer--;
