@@ -66,6 +66,7 @@ export default class Juego2 extends Phaser.Scene {
       .setScale(0.05);
     this.salida.visible = false;
 
+
     // find object layer
     // if type is "stars", add to stars group
     objectosLayer.objects.forEach((objData) => {
@@ -144,7 +145,7 @@ this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
 
-
+console.log("si")
   }
 
   update() {
@@ -170,6 +171,10 @@ this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     if (this.cursors.up.isDown && this.jugador.body.blocked.down) {
       this.jugador.setVelocityY(-330);
     }
+
+     if (this.gameOver) {
+      this.scene.start("GameOver");
+    }
   }
 
   recolectarEstrella(jugador, estrella) {
@@ -177,12 +182,17 @@ this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
     if (this.estrellas.getTotalUsed() < 5) {
       this.salida.visible = true;
+    }  
+  }
+
+  asarNivel(jugador, salida) {
+    if (salida.visible === true) {
+      this.scene.start("Juego1");
     }
   }
 
-
  boom() {
-  gameOver = true
+  this.gameOver = true;
  } 
 
   onSecond() {

@@ -1,5 +1,5 @@
 // URL to explain PHASER scene: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/scene/
-import Juego2 from "./Juego2.js";
+
 
 export default class Juego extends Phaser.Scene {
   score;
