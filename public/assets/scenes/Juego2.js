@@ -78,8 +78,11 @@ export default class Juego2 extends Phaser.Scene {
         case "bomb": {
           this.bomb = this.physics.add
             .sprite(spawnPoint.x, spawnPoint.y, "bomb")
-            .setScale(2);
-          this.bomb.setBounce(1);
+            .setScale(2)
+            .setVelocity(250, 350)
+            .setCollideWorldBounds(true)
+            .setBounce(1);
+
           break;
         } //SpawnPoint salida
         case "salida": {
