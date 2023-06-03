@@ -84,6 +84,8 @@ export default class Juego3 extends Phaser.Scene {
             this.bomb = this.physics.add
               .sprite(spawnPoint.x, spawnPoint.y, "bomb")
               .setScale(2);
+              this.bomb.setBounce(0.2);
+
             break;
           }
         }

@@ -13,7 +13,7 @@ export default class GameOver extends Phaser.Scene {
     .setInteractive()
     .on('pointerdown', () => this.scene.start('hello-world')); ;
   
-    console.log("si")
+   
 
   }
   

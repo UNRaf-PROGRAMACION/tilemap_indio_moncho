@@ -59,6 +59,8 @@ export default class Juego2 extends Phaser.Scene {
 
     // Create empty group of starts
     this.estrellas = this.physics.add.group();
+    
+    //SpawnPoint salida
     spawnPoint = map.findObject("objetos", (obj) => obj.name === "salida");
     console.log("spawn point exit ", spawnPoint);
     this.salida = this.physics.add
@@ -84,7 +86,7 @@ export default class Juego2 extends Phaser.Scene {
           this.bomb = this.physics.add
             .sprite(spawnPoint.x, spawnPoint.y, "bomb")
             .setScale(2);
-            this.bomb.setBounce(1);
+            this.bomb.setBounce(0.2);
           break;
         }
       }
@@ -150,7 +152,7 @@ export default class Juego2 extends Phaser.Scene {
     this.timerText.setScrollFactor(0);
 
 
-console.log("si")
+
   }
 
   update() {
