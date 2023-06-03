@@ -22,6 +22,8 @@ export default class Juego extends Phaser.Scene {
     // load assets
     this.load.tilemapTiledJSON("map", "./public/tilemaps/nivel1.json");
 
+    this.load
+
     this.load.image("tilesFondo", "./public/assets/images/sky.png");
     this.load.image("tilesPlataforma", "./public/assets/images/platform.png");
 
