@@ -59,21 +59,19 @@ export default class Juego2 extends Phaser.Scene {
 
     // Create empty group of starts
     this.estrellas = this.physics.add.group();
-    
-    //SpawnPoint salida
-    
-    
 
+   
     // find object layer
     // if type is "stars", add to stars group
     objectosLayer.objects.forEach((objData) => {
       //console.log(objData.name, objData.type, objData.x, objData.y);
+          // add star to scene
+          // console.log("estrella agregada: ", x, y);
 
       const { x = 0, y = 0, name } = objData;
       switch (name) {
         case "estrella": {
-          // add star to scene
-          // console.log("estrella agregada: ", x, y);
+         
           const star = this.estrellas.create(x, y, "star");
           break;
         }
@@ -81,14 +79,14 @@ export default class Juego2 extends Phaser.Scene {
           this.bomb = this.physics.add
             .sprite(spawnPoint.x, spawnPoint.y, "bomb")
             .setScale(2);
-            this.bomb.setBounce(1);
+          this.bomb.setBounce(1);
           break;
-        }
+        } //SpawnPoint salida
         case "salida": {
           this.salida = this.physics.add
-      .sprite(spawnPoint.x, spawnPoint.y, "exit")
-      .setScale(0.05);
-    this.salida.visible = false;
+            .sprite(spawnPoint.x, spawnPoint.y, "exit")
+            .setScale(0.05);
+          this.salida.visible = false;
           break;
         }
       }
@@ -119,7 +117,7 @@ export default class Juego2 extends Phaser.Scene {
       null,
       this
     );
-  
+
     // todo / para hacer: texto de puntaje
     this.score = 0;
     this.scoreText = this.add.text(20, 20, "Score:" + this.score, {
@@ -146,11 +144,11 @@ export default class Juego2 extends Phaser.Scene {
     this.cameras.main.startFollow(this.jugador);
 
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    
+
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-    
+
     this.scoreText.setScrollFactor(0);
-    
+
     this.timerText.setScrollFactor(0);
 
 
@@ -181,7 +179,7 @@ export default class Juego2 extends Phaser.Scene {
       this.jugador.setVelocityY(-330);
     }
 
-     if (this.gameOver) {
+    if (this.gameOver) {
       this.scene.start("GameOver");
     }
   }
@@ -191,7 +189,7 @@ export default class Juego2 extends Phaser.Scene {
 
     if (this.estrellas.getTotalUsed() < 5) {
       this.salida.visible = true;
-    }  
+    }
   }
 
   pasarNivel(jugador, salida) {
@@ -200,9 +198,9 @@ export default class Juego2 extends Phaser.Scene {
     }
   }
 
- boom() {
-  this.gameOver = true;
- } 
+  boom() {
+    this.gameOver = true;
+  }
 
   onSecond() {
     this.timer--;
