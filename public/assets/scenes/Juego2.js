@@ -138,11 +138,15 @@ export default class Juego2 extends Phaser.Scene {
       loop: true,
     });
 
-this.cameras.main.startFollow(this,this.jugador);
+this.cameras.main.startFollow(this.jugador);
 
 this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
 this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+
+this.scoreText.setScrollFactor(0);
+
+this.timerText.setScrollFactor(0);
 
 
 console.log("si")
