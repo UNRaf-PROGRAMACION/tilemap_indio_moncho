@@ -21,7 +21,6 @@ export default class Juego extends Phaser.Scene {
   preload() {
     // load assets
     this.load.tilemapTiledJSON("map", "./public/tilemaps/nivel1.json");
-    //this.load.tilemapTiledJSON("map", "./public/tilemaps/nivel2.json");
 
     this.load.image("tilesFondo", "./public/assets/images/sky.png");
     this.load.image("tilesPlataforma", "./public/assets/images/platform.png");
@@ -103,12 +102,6 @@ export default class Juego extends Phaser.Scene {
       .setScale(0.05);
     this.salida.visible = false;
 
-    /* spawnPoint = map.findObject("objetos", (obj) => obj.name === "bomb");
-    console.log("spawn point bomb ", spawnPoint);
-    this.bomb = this.physics.add
-      .sprite(spawnPoint.x, spawnPoint.y, "bomb") 
-      .setScale(2); 
-          this.bomb.setBounce(1); */
 
     // find object layer
     // if type is "stars", add to stars group
@@ -129,7 +122,6 @@ export default class Juego extends Phaser.Scene {
     this.physics.add.collider(this.jugador, plataformaLayer);
     this.physics.add.collider(this.estrellas, plataformaLayer);
     this.physics.add.collider(this.salida, plataformaLayer);
-    // this.physics.add.collider(this.bomb, plataformaLayer);
     this.physics.add.collider(
       this.jugador,
       this.estrellas,
@@ -144,15 +136,6 @@ export default class Juego extends Phaser.Scene {
       null,
       this
     );
-    /*
-    this.physics.add.collider(
-      this.bomb,
-      this.estrellas,
-      this.boom,
-      null,
-      this
-    );
-    */
 
     // todo / para hacer: texto de puntaje
     this.score = 0;
@@ -223,11 +206,6 @@ export default class Juego extends Phaser.Scene {
     }
   }
 
-  /*
- boom() {
-  gameOver = true
- } 
-  */
 
   onSecond() {
     this.timer--;

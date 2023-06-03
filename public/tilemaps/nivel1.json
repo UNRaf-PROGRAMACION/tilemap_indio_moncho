@@ -56,6 +56,12 @@
          "locked":true,
          "name":"plataformas",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"colision",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":24,

@@ -55,6 +55,12 @@
          "id":2,
          "name":"plataformas",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"colision",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":24,
@@ -93,8 +99,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":692.595297513238,
-                 "y":539.281142909867
+                 "x":715.901129661176,
+                 "y":533.454684872883
                 }, 
                 {
                  "height":0,
@@ -129,8 +135,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":462.716942533011,
-                 "y":342.821275804352
+                 "x":464.173557042257,
+                 "y":330.44005247576
                 }, 
                 {
                  "height":0,
@@ -178,7 +184,7 @@
  "nextobjectid":12,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.8.5",
+ "tiledversion":"1.10.1",
  "tileheight":32,
  "tilesets":[
         {
@@ -320,6 +326,6 @@
         }],
  "tilewidth":32,
  "type":"map",
- "version":"1.8",
+ "version":"1.10",
  "width":24
 }

@@ -19,11 +19,11 @@ export default class Juego2 extends Phaser.Scene {
 
   preload() {
     // load assets
-    this.load.tilemapTiledJSON("map3", "./public/tilemaps/nivel3.json");
+    this.load.tilemapTiledJSON("map2", "./public/tilemaps/nivel2.json");
   }
 
   create() {
-    const map = this.make.tilemap({ key: "map3" });
+    const map = this.make.tilemap({ key: "map2" });
 
     // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
     // Phaser's cache (i.e. the name you used in preload)
@@ -84,6 +84,7 @@ export default class Juego2 extends Phaser.Scene {
           this.bomb = this.physics.add
             .sprite(spawnPoint.x, spawnPoint.y, "bomb")
             .setScale(2);
+            this.bomb.setBounce(1);
           break;
         }
       }
@@ -138,15 +139,15 @@ export default class Juego2 extends Phaser.Scene {
       loop: true,
     });
 
-this.cameras.main.startFollow(this.jugador);
+    this.cameras.main.startFollow(this.jugador);
 
-this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-
-this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-
-this.scoreText.setScrollFactor(0);
-
-this.timerText.setScrollFactor(0);
+    this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    
+    this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
+    
+    this.scoreText.setScrollFactor(0);
+    
+    this.timerText.setScrollFactor(0);
 
 
 console.log("si")
@@ -189,9 +190,9 @@ console.log("si")
     }  
   }
 
-  asarNivel(jugador, salida) {
+  pasarNivel(jugador, salida) {
     if (salida.visible === true) {
-      this.scene.start("Juego1");
+      this.scene.start("Juego3");
     }
   }
 
