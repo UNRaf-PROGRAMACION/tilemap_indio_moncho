@@ -199,7 +199,7 @@ export default class Juego extends Phaser.Scene {
 
     this.score++;
     this.scoreText.setText(
-      "Nivel:1 - Score:" + (this.score * 10)
+      "Score:" + (this.score * 10)
     );
 
     if (this.estrellas.getTotalUsed() < 5) {

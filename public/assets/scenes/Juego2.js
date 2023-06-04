@@ -190,6 +190,11 @@ export default class Juego2 extends Phaser.Scene {
   recolectarEstrella(jugador, estrella) {
     estrella.disableBody(true, true);
 
+    this.score++;
+    this.scoreText.setText(
+      "Score:" + (this.score * 10)
+    );
+
     if (this.estrellas.getTotalUsed() < 5) {
       this.salida.visible = true;
     }
