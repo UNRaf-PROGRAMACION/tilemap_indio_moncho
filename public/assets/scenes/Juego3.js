@@ -199,7 +199,7 @@ export default class Juego3 extends Phaser.Scene {
 
     pasarNivel(jugador, salida) {
         if (salida.visible === true) {
-            this.scene.start('hello-world');
+            this.scene.start("Win");
         }
     }
 
@@ -214,4 +214,6 @@ export default class Juego3 extends Phaser.Scene {
             this.gameOver = true;
         }
     }
+
+
 }
