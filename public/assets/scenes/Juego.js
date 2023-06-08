@@ -104,6 +104,7 @@ export default class Juego extends Phaser.Scene {
       .setScale(0.05);
     this.salida.visible = false;
 
+    
 
     // find object layer
     // if type is "stars", add to stars group
@@ -197,10 +198,10 @@ export default class Juego extends Phaser.Scene {
     //this.score = this.score + 10;
     //console.log(this.score);
 
-    this.score++;
-    this.scoreText.setText(
-      "Score:" + (this.score * 10)
-    );
+      this.score++;
+      this.scoreText.setText(
+        "Score:" + (this.score * 10)
+      );
 
     if (this.estrellas.getTotalUsed() < 5) {
       this.salida.visible = true;
