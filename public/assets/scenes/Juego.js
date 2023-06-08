@@ -104,7 +104,7 @@ export default class Juego extends Phaser.Scene {
       .setScale(0.05);
     this.salida.visible = false;
 
-    
+
 
     // find object layer
     // if type is "stars", add to stars group
@@ -210,7 +210,7 @@ export default class Juego extends Phaser.Scene {
 
   pasarNivel(jugador, salida) {
     if (salida.visible === true) {
-      this.scene.start("Juego2");
+      this.scene.start("Juego3");
     }
   }
 
