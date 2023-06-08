@@ -75,7 +75,7 @@ export default class Juego2 extends Phaser.Scene {
           const star = this.estrellas.create(x, y, "star");
           break;
         }
-        /* case "bomb": {
+        case "bomb": {
           this.bomb = this.physics.add
             .sprite(spawnPoint.x, spawnPoint.y, "bomb")
             .setScale(2)
@@ -91,11 +91,11 @@ export default class Juego2 extends Phaser.Scene {
             .setScale(0.05);
           this.salida.visible = false;
           break;
-        } */
+        }
       }
     });
 
-    spawnPoint = map.findObject("objetos", (obj) => obj.name === "salida");
+    /* spawnPoint = map.findObject("objetos", (obj) => obj.name === "salida");
     console.log("spawn point salida ", spawnPoint);
     this.salida = this.physics.add
       .sprite(spawnPoint.x, spawnPoint.y, "exit")
@@ -109,7 +109,7 @@ export default class Juego2 extends Phaser.Scene {
       .setScale(2)
       .setVelocity(250, 350)
       .setBounce(1)
-      .setCollideWorldBounds(true);
+      .setCollideWorldBounds(true); */
 
 
 
