@@ -207,7 +207,7 @@ export default class Juego2 extends Phaser.Scene {
     }
   }
 
-  recolectarEstrella(jugador, estrella) {
+  recolectarEstrella(estrella) {
     estrella.disableBody(true, true);
 
     this.score++;
@@ -220,7 +220,7 @@ export default class Juego2 extends Phaser.Scene {
     }
   }
 
-  pasarNivel(jugador, salida) {
+  pasarNivel(salida) {
     if (salida.visible === true) {
       this.scene.start("Juego2");
     }
