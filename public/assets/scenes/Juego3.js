@@ -184,7 +184,7 @@ export default class Juego3 extends Phaser.Scene {
         }
     }
 
-    recolectarEstrella(estrella) {
+    recolectarEstrella(jugador, estrella) {
         estrella.disableBody(true, true);
 
         this.score++;
