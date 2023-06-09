@@ -203,7 +203,7 @@ export default class Juego extends Phaser.Scene {
         "Score:" + (this.score * 10)
       );
 
-    if (this.estrellas.getTotalUsed() < 5) {
+    if (this.estrellas.getTotalUsed() === 5) {
       this.salida.visible = true;
     }
   }

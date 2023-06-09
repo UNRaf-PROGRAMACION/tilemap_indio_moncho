@@ -127,7 +127,7 @@ export default class Juego3 extends Phaser.Scene {
         });
 
         //timer
-        this.timer = 60;
+        this.timer = 80;
         this.timerText = this.add.text(700, 20, this.timer, {
             fontSize: "32px",
             fontStyle: "bold",
@@ -192,7 +192,7 @@ export default class Juego3 extends Phaser.Scene {
             "Score:" + (this.score * 10)
         );
 
-        if (this.estrellas.getTotalUsed() < 5) {
+        if (this.estrellas.getTotalUsed() === 6) {
             this.salida.visible = true;
         }
     }
