@@ -193,7 +193,7 @@ export default class Juego extends Phaser.Scene {
     }
   }
 
-  recolectarEstrella(jugador, estrella) {
+  recolectarEstrella(estrella) {
     estrella.disableBody(true, true);
     //this.score = this.score + 10;
     //console.log(this.score);
@@ -208,7 +208,7 @@ export default class Juego extends Phaser.Scene {
     }
   }
 
-  pasarNivel(jugador, salida) {
+  pasarNivel(salida) {
     if (salida.visible === true) {
       this.scene.start("Juego3");
     }
