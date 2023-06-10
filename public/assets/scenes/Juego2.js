@@ -9,7 +9,7 @@ export default class Juego2 extends Phaser.Scene {
     }
   
     init({ score }) {
-      this.score = score * 10;
+      this.score = score ;
       this.gameOver = false;
      
     }

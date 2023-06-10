@@ -9,7 +9,7 @@ export default class Juego3 extends Phaser.Scene {
     }
 
     init({ score }) {
-        this.score = score * 10;
+        this.score = score ;
         this.gameOver = false;
         // this is called before the scene is created
         // init variables
