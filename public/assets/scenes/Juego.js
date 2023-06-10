@@ -209,8 +209,9 @@ export default class Juego extends Phaser.Scene {
   }
 
   pasarNivel(salida) {
-    if (salida.visible === true) {
-      this.scene.start("Juego2");
+    if (this.salida.visible === true) {
+      this.scene.start("Juego2",{score: this.score,});
+      
     }
   }
 
