@@ -9,7 +9,7 @@ export default class Juego3 extends Phaser.Scene {
     }
 
     init({ score }) {
-        this.score = score;
+        this.score = score * 10;
         this.gameOver = false;
         // this is called before the scene is created
         // init variables
@@ -119,7 +119,7 @@ export default class Juego3 extends Phaser.Scene {
         );
 
         // todo / para hacer: texto de puntaje
-        this.score = 0;
+        this.score++;
         this.scoreText = this.add.text(20, 20, "Score:" + this.score, {
             fontSize: "32px",
             fontStyle: "bold",
@@ -192,13 +192,14 @@ export default class Juego3 extends Phaser.Scene {
             "Score:" + (this.score * 10)
         );
 
-        if (this.estrellas.getTotalUsed() === 6) {
+        if (this.estrellas.getTotalUsed() == 0) {
             this.salida.visible = true;
+            this.score--
         }
     }
 
-    pasarNivel(salida) {
-        if (salida.visible === true) {
+    pasarNivel() {
+        if (this.salida.visible === true) {
             this.scene.start("Win");
         }
     }
