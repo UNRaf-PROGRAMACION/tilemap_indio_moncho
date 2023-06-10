@@ -200,12 +200,12 @@ export default class Juego extends Phaser.Scene {
 
       this.score++;
       this.scoreText.setText(
-        "Score:" + (this.score * 10)
+        "Score:" + (this.score + 10)
       );
 
     if (this.estrellas.getTotalUsed() == 0) {
       this.salida.visible = true;
-      this.score--
+      this.score = this.score - 10
     }
   }
 
